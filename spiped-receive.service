@@ -1,0 +1,13 @@
+[Unit]
+Description=spiped receive for Redis
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=spiped
+Group=spiped
+ExecStart=/usr/bin/spiped -F -d -s [0.0.0.0]:46379 -t [127.0.0.1]:6379 -k /etc/spiped/redis.key
+
+[Install]
+WantedBy=multi-user.target
+

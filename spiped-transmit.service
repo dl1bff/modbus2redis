@@ -1,0 +1,14 @@
+[Unit]
+Description=spiped transmit for Redis
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=spiped
+Group=spiped
+ExecStart=/usr/bin/spiped -F -e -s [127.0.0.1]:6379 -t remote.server:46379 -k /etc/spiped/redis.key
+
+[Install]
+WantedBy=multi-user.target
+
+
