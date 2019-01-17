@@ -4,7 +4,7 @@ Periodically read data from a Modbus device and store it in Redis.
 
 
 
-install:
+install (Debian, Raspbian):
 
 ```
 
@@ -29,6 +29,8 @@ systemctl start modbus2redis.service
 If the Redis server is not on the local machine:  use "spiped"
 
 ```
+apt-get install spiped
+
 addgroup --system spiped
 adduser --system --ingroup spiped spiped
 
