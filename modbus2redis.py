@@ -66,17 +66,14 @@ reqlist = cf["reqlist"]
 
 
 while 1==1:
-	for i in range(0, len(reqlist)):
-		job = reqlist[i]
-
-		rr = client.read_holding_registers(job["address"], job["numreg"], unit=job["unit"])
-
-		if (rr.isError()):
-		  print "ERROR: read_holding_registers " + job["prefix"]
-		else:
-		  if getattr(sys.modules[__name__], job["func"])(rr.registers, job["prefix"], redis_handle) != 0:
-		    print "ERROR: " + job["func"]
-		    break 
-                time.sleep(0.05)
-
-	time.sleep(1)
+ for i in range(0, len(reqlist)):
+  job = reqlist[i]
+  rr = client.read_holding_registers(job["address"], job["numreg"], unit=job["unit"])
+  if (rr.isError()):
+   print "ERROR: read_holding_registers " + job["prefix"]
+  else:
+   if getattr(sys.modules[__name__], job["func"])(rr.registers, job["prefix"], redis_handle) != 0:
+    print "ERROR: " + job["func"]
+    break 
+  time.sleep(0.05)
+ time.sleep(1)
